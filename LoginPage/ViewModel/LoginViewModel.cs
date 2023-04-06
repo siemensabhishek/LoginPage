@@ -1,5 +1,4 @@
-﻿using LoginPage.View;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,6 +13,8 @@ namespace LoginPage.ViewModel
         private int _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
+
+        public event EventHandler LoginSucceded;
 
         public int Username
         {
@@ -146,9 +147,12 @@ namespace LoginPage.ViewModel
                 //Proceed to login
 
 
-                var Page2 = new InfoView(); //create your new form.
-                Page2.Show(); //show the new form.
+                //var Page2 = new InfoView(); //create your new form.
+                //Page2.Show(); //show the new form.
 
+                //TODO : Update viewIndex
+                MainWindow.UserId = Username;
+                MainWindow.ViewIndex = 1;
 
             }
         }
@@ -183,22 +187,6 @@ namespace LoginPage.ViewModel
 
         async Task<bool> IsValidCustomer(int CustId, int password)
         {
-            //string url = $"https://localhost:7172/customer/customer_details";
-            //using(HttpClient client = new HttpClient())
-            //{
-
-            //    var response = await client.GetAsync(url);
-
-
-            //   // var response = client.GetAsync(url);
-            //    //  response.Wait();
-            // //   if (response != "no") return "yes";
-
-            //}
-            //return "no";
-
-
-
             var url = $"https://localhost:7172/customer/validCustomer/{CustId}/{password}";
 
             using (var client = new HttpClient())
@@ -217,52 +205,6 @@ namespace LoginPage.ViewModel
 
         }
 
-
-
-
-
-
-
-
-
-
-
-        /*  // gettting response as string not as bool form api
-                async Task<string> IsValidCustomer(int custId, int password)
-                {
-                    string url = $"https://localhost:7172/customer/validCustomer/{custId}/{password}";
-                    // make an API request 
-                   // var response = "no";
-                    using (HttpClient client = new HttpClient())
-                    {
-                      // var response = client.GetAsync(url);
-                     //   response.Wait();
-                        //  var temp = JsonConvert.DeserializeObject(response);
-                        var response = await Task.Run(() => client.GetAsync(url).Result);
-                        string temp = await response.Content.ReadAsStringAsync();
-                        // deserilizin the json
-                      //  var customers = JsonConvert.DeserializeObject(response);
-                        if (temp != "no") return "yes";
-
-
-                    }
-                    return "no";
-
-                }
-
-
-        */
-
-
-        //bool validLogin(string username, string password)
-        //{
-        //    if(Customer.)
-        //}
-        //private void localModeBtn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Uri uri = new Uri("Page2.xaml", UriKind.Relative);
-        //    this.NavigationService.Navigate(uri);
-        //}
 
 
 

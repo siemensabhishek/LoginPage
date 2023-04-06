@@ -1,11 +1,4 @@
-﻿using LoginPage.View;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace LoginPage
 {
@@ -17,17 +10,19 @@ namespace LoginPage
         public static MainWindow ParentWindowRef;
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
-            var LoginView = new LoginView();
-            LoginView.Show();
-            LoginView.IsVisibleChanged += (s, ev) =>
-            {
-                if (LoginView.IsVisible == false && LoginView.IsLoaded)
-                {
-                    var InfoView = new InfoView();
-                    InfoView.Show();
-                    LoginView.Close();
-                }
-            };
+            //var LoginView = new LoginView();
+            //LoginView.Show();
+            //LoginView.IsVisibleChanged += (s, ev) =>
+            //{
+            //    if (LoginView.IsVisible == false && LoginView.IsLoaded)
+            //    {
+            //        var InfoView = new InfoView();
+            //        InfoView.Show();
+            //        LoginView.Close();
+            //    }
+            //};
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
         }
     }
 }
