@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+
 namespace LoginPage.ViewModel
 {
     public class ViewModelCommand : ICommand
@@ -32,14 +29,14 @@ namespace LoginPage.ViewModel
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value;}
+            remove { CommandManager.RequerySuggested -= value; }
         }
 
 
         // Method
         public bool CanExecute(object parameter)
         {
-            return _canExecuteAction == null ? true : _canExecuteAction(parameter);    
+            return _canExecuteAction == null ? true : _canExecuteAction(parameter);
         }
 
         public void Execute(object parameter)

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,7 +15,7 @@ namespace LoginPage.ViewModel
         private string _errorMessage;
         private bool _isViewVisible = true;
 
-        public event EventHandler LoginSucceded;
+        //  public event EventHandler LoginSucceded;
 
         public int Username
         {
@@ -65,10 +66,6 @@ namespace LoginPage.ViewModel
 
 
 
-
-
-
-
         // Commands
         public ICommand LoginCommand { get; set; }
         public ICommand RecoverPasswordCommand { get; }
@@ -91,69 +88,21 @@ namespace LoginPage.ViewModel
 
 
 
-        // -----------------
-        /*
-                public void ExecuteLoginCommand(object obj)
-                {
 
-                    var isValidInput = Int32.TryParse(Username,out int custId);
-                    var temp = IsValidCustomer(custId);
-                    if (!IsValidCustomer(custId).Result|| !isValidInput)
-                    {
-                        //throw some error;
-                        ErrorMessage = "InValid UserName or Password";
-
-                    }
-                    else
-                    {
-                        //Proceed to login
-
-                        //Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(Username), null);
-                        //IsViewVisible = false;
-
-                        var Page2 = new InfoView(); //create your new form.
-                        Page2.Show(); //show the new form.
-                         //only if you want to close the current form.
-
-
-                    }
-                    // LoadAllCustomer();
-
-
-
-                    //bool ValidLogin(string fName, string lName)
-                    //{
-                    //    if (Customer.firstName ! = )
-                    //        return false;
-                    //}
-
-
-                }
-        */
 
         public void ExecuteLoginCommand(object obj)
         {
-
-            // var isValidInput = Int32.TryParse(Username, out int custId);
             var temp = IsValidCustomer(Username, Password);
             if (!temp.Result)
             {
-                //throw some error;
                 ErrorMessage = "InValid UserName or Password";
-
             }
             else
             {
-                //Proceed to login
-
-
-                //var Page2 = new InfoView(); //create your new form.
-                //Page2.Show(); //show the new form.
-
-                //TODO : Update viewIndex
+                MainWindow.token = _AccessToken;
+                MainWindow.refreshToken = _RefreshToken;
                 MainWindow.UserId = Username;
                 MainWindow.ViewIndex = 1;
-
             }
         }
 
@@ -161,27 +110,8 @@ namespace LoginPage.ViewModel
 
 
 
-        /*
-
-        async Task<bool> IsValidCustomer(int custId, int password)
-        {
-            //  List<Customer> customers = new List<Customer>();
-            string url = $"https://localhost:7172/customer/validCustomer/{custId}";
-            // make an API request 
-            using (HttpClient client = new HttpClient())
-            {
-
-                var response = await Task.Run(() => client.GetAsync(url).Result);
-                //  string json = await response.Content.ReadAsStringAsync();
-                // deserilizin the json
-                // customers = JsonConvert.DeserializeObject<List<Customer>>(json);
-                if (response != null) return true;
-
-            }
-            return false;
-
-        }
-        */
+        string _AccessToken = "";
+        string _RefreshToken = "";
 
 
 
@@ -191,16 +121,22 @@ namespace LoginPage.ViewModel
 
             using (var client = new HttpClient())
             {
-
                 var msg = new HttpRequestMessage(HttpMethod.Get, url);
                 msg.Headers.Add("User-Agent", "C# Program");
                 var res = client.SendAsync(msg).Result;
 
                 var content = await res.Content.ReadAsStringAsync();
                 var stringContent = Convert.ToString(content);
-                var contentResponse = JsonConvert.DeserializeObject<bool>(stringContent);
-                // Console.WriteLine(content);
-                return contentResponse;
+                var contentResponse = JsonConvert.DeserializeObject<List<string>>(stringContent);
+                var firstResponse = contentResponse[0];
+                var secondResponse = contentResponse[1];
+                var AccessToken = Convert.ToString(firstResponse);
+                var RefreshToken = Convert.ToString(secondResponse);
+                var refreshtoken1 = contentResponse[1];
+
+                _AccessToken = AccessToken;
+                _RefreshToken = RefreshToken;
+                return !string.IsNullOrEmpty(stringContent);
             }
 
         }
@@ -217,29 +153,12 @@ namespace LoginPage.ViewModel
                 canExecute = true;
             }
 
-
             else
             {
                 canExecute = false;
             }
             return canExecute;
         }
-
-
-
-        // Query
-
-        //public async void MakeQuery()
-        //{
-        //    var cities = await AccuWeatherHelper.GetCities(Query);
-
-        //    Cities.Clear();
-        //    foreach (City city in cities)
-        //    {
-        //        Cities.Add(city);
-        //    }
-        //}
-
 
     }
 }

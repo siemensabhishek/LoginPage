@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("customerentities.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("crudmodels.dll")]
 
 

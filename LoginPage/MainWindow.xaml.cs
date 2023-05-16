@@ -11,7 +11,7 @@ namespace LoginPage
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string _currView;
+        //   private string _currView;
         private static int _viewIndex;
         private static UserControl viewHolder;
 
@@ -44,6 +44,8 @@ namespace LoginPage
         }
 
         public static int? UserId { get; set; }
+        public static string token { get; set; }
+        public static string refreshToken { get; set; }
 
         public MainWindow()
         {
