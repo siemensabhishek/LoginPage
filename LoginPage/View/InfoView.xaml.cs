@@ -17,10 +17,7 @@ namespace LoginPage.View
         public InfoView()
         {
             InitializeComponent();
-            //timer = new System.Timers.Timer();
             timer = new Timer(interval: 1000);
-            //timer.Interval = 100;
-            //        timer.Elapsed += OnTimerElapsed;
             timer.Start();
             timer.Elapsed += OnTimerElapsed;
 

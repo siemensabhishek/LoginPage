@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -17,6 +18,7 @@ namespace LoginPage.ViewModel
         {
             Console.WriteLine(DateTime.Now);
             Console.WriteLine("Info view Started");
+
             _activityTracker = new ActivityTracker();
             TrackActivity();
             CustomerEditDetails();
@@ -66,6 +68,9 @@ namespace LoginPage.ViewModel
             {
                 Console.WriteLine("Token has Expired");
                 Console.WriteLine(DateTime.Now);
+                InfoView.m_counter = 0;
+                MessageBox.Show("Token expired please press ok to login again", "Alert", MessageBoxButton.OK, MessageBoxImage.Information);
+                // InfoView.m_counter = 0;
                 MainWindow.ViewIndex = 3;
 
             }
@@ -175,9 +180,6 @@ namespace LoginPage.ViewModel
         }
 
 
-
-
-
         // Commands
         public ICommand SaveCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -261,20 +263,6 @@ namespace LoginPage.ViewModel
         }
 
 
-        public async void RegenerateAccessToken()
-        {
-            var newUrl = "https://localhost:7172/customer/generate-Tokens";
-            using (var client2 = new HttpClient())
-            {
-                var msg1 = new HttpRequestMessage(HttpMethod.Get, newUrl);
-                msg1.Headers.Add("User-Agent", "C# Program");
-                var res2 = client2.SendAsync(msg1).Result;
-                var content2 = await res2.Content.ReadAsStringAsync();
-                var stringContent2 = Convert.ToString(content2);
-                MainWindow.token = stringContent2;
-
-            }
-        }
 
 
         // post method to send the previous refresh token to the server side to check the validity

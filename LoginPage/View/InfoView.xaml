@@ -112,24 +112,6 @@
 
 
 
-            <!--<TextBlock Text="{Binding ErrorMessage}"
-                       FontSize="20"
-                       FontWeight="Medium"
-                       Margin="0 5 0 0"
-                       TextWrapping="Wrap"
-                    />-->
-
-            <!--<Button x:Name="btnLogin"
-                    Command="{Binding LoginCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    BorderThickness="0"
-                    Content="Login"
-                    Foreground="White"
-                    Background="Blue"
-                    FontSize="12"
-                    Cursor="Hand"
-                    Margin="0,50,0,0"
-                    Padding="10 0 10 0"
-                    HorizontalAlignment="Center" />-->
 
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0" Height="83" Width="182">
@@ -179,15 +161,7 @@
 
 
 
-            <!--<Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border Width="150" Height="40"
-                            CornerRadius="9">
-                        
-                    </Border>
-                            
-                </ControlTemplate>
-            </Button.Template>-->
+
 
         </StackPanel>
     </Grid>

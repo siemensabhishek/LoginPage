@@ -98,7 +98,6 @@
     <Compile Include="Model\CustEditDetails.cs" />
     <Compile Include="Model\CustomerLogin.cs" />
     <Compile Include="ViewModel\InfoViewModel.cs" />
-    <Compile Include="ViewModel\HelperVM\helperVM.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelCommand.cs" />

@@ -15,7 +15,6 @@ namespace LoginPage.ViewModel
         private string _errorMessage;
         private bool _isViewVisible = true;
 
-        //  public event EventHandler LoginSucceded;
 
         public int Username
         {
